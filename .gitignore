@@ -1,0 +1,7 @@
+.tools/
+coverage.out
+seqvalidation-booking-example
+go.work
+go.work.sum
+.idea
+vendor

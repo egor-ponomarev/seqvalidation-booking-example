@@ -1,0 +1,31 @@
+# Run in order on a fresh server. Restart to reset capacity and booking IDs.
+
+### 1. Missing fields: 422, two required violations, no lookup
+POST http://localhost:8080/bookings
+Content-Type: application/json
+
+{}
+
+### 2. Invalid values: 422, two positive violations, no lookup
+POST http://localhost:8080/bookings
+Content-Type: application/json
+
+{"activityId": -1, "seats": 0}
+
+### 3. Unknown activity: 422, not_found, one lookup
+POST http://localhost:8080/bookings
+Content-Type: application/json
+
+{"activityId": 999, "seats": 2}
+
+### 4. Not enough seats: 422, insufficient_seats, one lookup
+POST http://localhost:8080/bookings
+Content-Type: application/json
+
+{"activityId": 1, "seats": 5}
+
+### 5. Create booking: 201, booking ID 1, one lookup; reserves two seats
+POST http://localhost:8080/bookings
+Content-Type: application/json
+
+{"activityId": 1, "seats": 2}
