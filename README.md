@@ -12,8 +12,8 @@ reset the activities and bookings.
 
 ## Run
 
-You need Go 1.25.0 or newer. Gin v1.12.0 requires this version; seqvalidation itself
-supports Go 1.22. The first run downloads dependencies.
+You need Go 1.26.0 or newer, as required by `golang.org/x/net`; seqvalidation
+itself supports Go 1.22. The first run downloads dependencies.
 
 ```sh
 git clone https://github.com/egor-ponomarev/seqvalidation-booking-example.git
@@ -221,7 +221,7 @@ go test ./...
 make check
 ```
 
-`make check` runs formatting, tests on Go 1.25.0, race tests and vet on Go 1.27.1,
+`make check` runs formatting, tests on Go 1.26.0, race tests and vet on Go 1.27.2,
 pinned golangci-lint and govulncheck. First use needs network access for tools,
 toolchains and the vulnerability database. Tool binaries go into ignored `.tools/`.
 

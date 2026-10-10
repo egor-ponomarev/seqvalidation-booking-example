@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := check
 
-GO_MIN := 1.25.0
-GO_CURRENT := 1.27.1
+GO_MIN := 1.26.0
+GO_CURRENT := 1.27.2
 GOLANGCI_VERSION := 2.14.0
 GOVULNCHECK_VERSION := v1.8.0
 TOOLS_DIR ?= $(CURDIR)/.tools
@@ -16,7 +16,8 @@ check: fmt-check test-min test-race vet lint vuln
 fmt-check:
 	@set -e; \
 	seq_goroot="$$(go env GOROOT)"; \
-	unformatted="$$("$$seq_goroot/bin/gofmt" -l .)"; \
+	unformatted="$$(find . -type d \( -name vendor -o -name .git -o -name .tools \) -prune -o \
+		-type f -name '*.go' -exec "$$seq_goroot/bin/gofmt" -l {} +)"; \
 	if [ -n "$$unformatted" ]; then printf '%s\n' "$$unformatted"; exit 1; fi
 
 test:
